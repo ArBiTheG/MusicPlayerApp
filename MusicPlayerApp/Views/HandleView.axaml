@@ -11,5 +11,13 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:HandleViewModel/>
 	</Design.DataContext>
-  <TextBlock Text="{Binding Greeting}"/>
+	<Grid RowDefinitions="*,auto">
+		<TextBlock Text="Здесь будет фотка"/>
+		<Grid Grid.Row="1">
+			<StackPanel>
+				<Button Content="Запустить"/>
+				<Button Content="Остановить"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
 </UserControl>
