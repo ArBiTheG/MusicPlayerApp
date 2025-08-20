@@ -8,13 +8,14 @@ namespace MusicPlayerApp.Services
 {
     public interface IMusicPlayer
     {
+        void Play(string path);
         void Play();
         void Pause();
         void Stop();
         void Seek(TimeSpan position);
         bool IsPlaying { get; }
-        TimeSpan Position { get; }
+        float Position { get; set; }
         TimeSpan Duration { get; }
-        float Volume { get; set; }
+        int Volume { get; set; }
     }
 }
