@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public interface IMusicLoader
+    public interface IMusicDataLoader
     {
         Music Load(string path);
     }

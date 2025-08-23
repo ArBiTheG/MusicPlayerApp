@@ -27,8 +27,8 @@ namespace MusicPlayerApp.ViewModels
         public MusicViewModel(Music music)
         {
             _music = music;
-            Name = _music.Name;
-            Artists = string.Join(",", _music.Artist);
+            Name = _music.Title;
+            Artists = string.Join(",", _music.Artists);
             Cover = LoadImage(_music.Path);
         }
 

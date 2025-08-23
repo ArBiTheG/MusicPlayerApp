@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public class LocalMusicLoader: IMusicLoader
+    public class MusicDataLoader: IMusicDataLoader
     {
         protected readonly Func<string, IMusicMetadata> CreateMetadata;
-        public LocalMusicLoader(Func<string, IMusicMetadata> createMetadata)
+        public MusicDataLoader(Func<string, IMusicMetadata> createMetadata)
         {
             CreateMetadata = createMetadata;
         }
@@ -21,9 +21,9 @@ namespace MusicPlayerApp.Services
             return new Music()
             {
                 Path = path,
-                Name = metadata.Title,
+                Title = metadata.Title,
                 Album = metadata.Album,
-                Artist = metadata.Artists
+                Artists = metadata.Artists
             };
         }
     }
