@@ -12,7 +12,7 @@
 		<vm:HandleViewModel/>
 	</Design.DataContext>
 	<Grid RowDefinitions="*,auto">
-		<TextBlock Text="Здесь будет фотка"/>
+		<TextBlock Text="{Binding Music.Title}"/>
 		<Grid Grid.Row="1">
 			<StackPanel>
 				<Button Content="Запустить"/>
