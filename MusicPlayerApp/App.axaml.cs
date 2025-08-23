@@ -19,6 +19,7 @@ namespace MusicPlayerApp
         public App()
         {
             _host = Host.CreateDefaultBuilder()
+                .AddServices()
                 .AddStores()
                 .AddViews()
                 .AddViewModels().Build();
