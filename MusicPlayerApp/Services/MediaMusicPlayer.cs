@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public class MediaMusicPlayer : IMusicPlayer
+    public class MediaMusicPlayer : IDisposable, IMusicPlayer
     {
         LibVLC _libVLC;
         MediaPlayer _mediaPlayer;
@@ -72,6 +72,26 @@ namespace MusicPlayerApp.Services
         public void Stop()
         {
             _mediaPlayer.Stop();
+        }
+
+        private bool disposed = false;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                // Освобождаем управляемые ресурсы
+            }
+            _libVLC.Dispose();
+            _mediaPlayer.Dispose();
+            disposed = true;
         }
     }
 }
