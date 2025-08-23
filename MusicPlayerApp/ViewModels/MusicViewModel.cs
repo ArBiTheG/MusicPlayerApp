@@ -14,9 +14,10 @@ namespace MusicPlayerApp.ViewModels
     public partial class MusicViewModel: ViewModelBase
     {
         private Music _music;
+        private IMusicImageLoader _imageLoader;
 
         [ObservableProperty]
-        private string _name;
+        private string _title;
 
         [ObservableProperty]
         private string _artists;
@@ -24,17 +25,18 @@ namespace MusicPlayerApp.ViewModels
         [ObservableProperty]
         private Bitmap? _cover;
 
-        public MusicViewModel(Music music)
+        public MusicViewModel(Music music, IMusicImageLoader imageLoader)
         {
             _music = music;
-            Name = _music.Title;
+            _imageLoader = imageLoader;
+
+            Title = _music.Title;
             Artists = string.Join(",", _music.Artists);
-            Cover = LoadImage(_music.Path);
+            Cover = LoadImage(_imageLoader, _music.Path);
         }
 
-        public Bitmap? LoadImage(string path)
+        private static Bitmap? LoadImage(IMusicImageLoader imageLoader, string path)
         {
-            IImageLoader imageLoader = new ImageMetadataLoader();
             byte[] bytes = imageLoader.LoadBytes(path);
             if (bytes.Length>0)
             {

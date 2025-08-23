@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public interface IImageLoader
+    public interface IMusicImageLoader
     {
         byte[] LoadBytes(string path);
     }
