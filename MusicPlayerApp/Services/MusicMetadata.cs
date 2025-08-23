@@ -7,30 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TagLib;
-using File = System.IO.File;
-using MusicFile = TagLib.File;
+using File = TagLib.File;
 
 namespace MusicPlayerApp.Services
 {
     public class MusicMetadata : IMusicData, IDisposable
     {
-        private readonly MusicFile _file;
+        private readonly File _file;
         public MusicMetadata(string path)
         {
-            if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("Путь до файла не может быть пустым");
-
-            string fullPath = Path.GetFullPath(path);
-            if (!File.Exists(fullPath))
-                throw new ArgumentException("Указанный файл не найден");
-
             try
             {
-                _file = MusicFile.Create(fullPath);
+                _file = File.Create(path);
             }
             catch
             {
-                throw new IOException($"Не удалось открыть файл '{fullPath}' для чтения метаданных");
+                throw new IOException($"Не удалось открыть файл '{path}' для чтения метаданных");
             }
         }
         public string Title 
