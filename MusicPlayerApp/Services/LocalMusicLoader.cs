@@ -23,7 +23,7 @@ namespace MusicPlayerApp.Services
                 Path = path,
                 Name = metadata.Title,
                 Album = metadata.Album,
-                Artist = metadata.Artist
+                Artist = metadata.Artists
             };
         }
     }

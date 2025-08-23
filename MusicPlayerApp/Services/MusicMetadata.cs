@@ -21,7 +21,7 @@ namespace MusicPlayerApp.Services
         { 
             get => _file.Tag.Title; 
         }
-        public string[] Artist
+        public string[] Artists
         {
             get => _file.Tag.Performers;
         }
