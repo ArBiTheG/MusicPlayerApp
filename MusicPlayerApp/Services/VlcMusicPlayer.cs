@@ -13,10 +13,10 @@ namespace MusicPlayerApp.Services
         private readonly MediaPlayer _mediaPlayer;
         Media? _currentMedia;
 
-        public VlcMusicPlayer()
+        public VlcMusicPlayer(LibVLC libVLC, MediaPlayer mediaPlayer)
         {
-            _libVLC = new LibVLC();
-            _mediaPlayer = new MediaPlayer(_libVLC);
+            _libVLC = libVLC;
+            _mediaPlayer = mediaPlayer;
         }
 
         public bool IsPlaying => _mediaPlayer.IsPlaying;

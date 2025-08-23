@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LibVLCSharp.Shared;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusicPlayerApp.Services;
 using MusicPlayerApp.ViewModels;
@@ -18,6 +19,9 @@ namespace MusicPlayerApp.HostBuilders
             {
                 services.AddSingleton<IMusicDataLoader>(s => new MusicDataLoader(str => new MusicMetadata(str)));
                 services.AddSingleton<IMusicImageLoader>(s => new MusicImageLoader(str => new MusicMetadataImage(str)));
+
+                services.AddSingleton(new LibVLC());
+                services.AddSingleton<MediaPlayer>();
                 services.AddSingleton<IMusicPlayer,VlcMusicPlayer>();
                 services.AddSingleton<MusicService>();
             });
