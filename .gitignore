@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MusicPlayerApp/Skillet_-_Hero_47950055.mp3
+/MusicPlayerApp.Tests/Skillet_-_Hero_47950055.mp3
