@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicPlayerApp.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace MusicPlayerApp.Services
             }
             catch
             {
-                throw new IOException($"Не удалось открыть файл '{path}' для чтения метаданных");
+                throw new MetadataException($"Не удалось открыть файл '{path}' для чтения метаданных");
             }
         }
         public byte[] ImageBytes
