@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public class MediaMusicPlayer : IDisposable, IMusicPlayer
+    public class VlcMusicPlayer : IDisposable, IMusicPlayer
     {
-        LibVLC _libVLC;
-        MediaPlayer _mediaPlayer;
+        private readonly LibVLC _libVLC;
+        private readonly MediaPlayer _mediaPlayer;
+        Media? _currentMedia;
 
-        public MediaMusicPlayer()
+        public VlcMusicPlayer()
         {
             _libVLC = new LibVLC();
             _mediaPlayer = new MediaPlayer(_libVLC);
@@ -23,30 +24,15 @@ namespace MusicPlayerApp.Services
         public float Position
         { 
             get => _mediaPlayer.Position; 
-            set
-            {
-                if (value < 0)
-                    _mediaPlayer.Position = 0;
-                else if (value > 1)
-                    _mediaPlayer.Position = 1;
-                else
-                    _mediaPlayer.Position = value;
-            }
+            set => _mediaPlayer.Position = Math.Clamp(value, 0f,1f);
         }
 
         public TimeSpan Duration => TimeSpan.FromMilliseconds(_mediaPlayer.Length);
 
         public int Volume 
         { 
-            get => _mediaPlayer.Volume; 
-            set {
-                if (value < 0)
-                    _mediaPlayer.Volume = 0;
-                else if (value > 100)
-                    _mediaPlayer.Volume = 100;
-                else
-                    _mediaPlayer.Volume = value;
-            }
+            get => _mediaPlayer.Volume;
+            set => _mediaPlayer.Position = Math.Clamp(value, 0, 100);
         }
 
         public void Pause()
@@ -56,7 +42,10 @@ namespace MusicPlayerApp.Services
 
         public void Play(string path)
         {
-            _mediaPlayer.Play(new Media(_libVLC, new Uri(path), ":no-video"));
+            _currentMedia?.Dispose();
+            _currentMedia = new Media(_libVLC, new Uri(path));
+            _currentMedia.AddOption(":no-video");
+            _mediaPlayer.Play(_currentMedia);
         }
 
         public void Play()
@@ -87,10 +76,10 @@ namespace MusicPlayerApp.Services
             if (disposed) return;
             if (disposing)
             {
-                // Освобождаем управляемые ресурсы
+                _libVLC.Dispose();
+                _mediaPlayer.Dispose();
+                _currentMedia?.Dispose();
             }
-            _libVLC.Dispose();
-            _mediaPlayer.Dispose();
             disposed = true;
         }
     }

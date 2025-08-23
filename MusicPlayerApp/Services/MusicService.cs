@@ -9,7 +9,7 @@ namespace MusicPlayerApp.Services
 {
     public class MusicService
     {
-        IMusicDataLoader musicLoader;
+        private readonly IMusicDataLoader musicLoader;
         public MusicService(IMusicDataLoader musicDataLoader)
         {
             musicLoader = musicDataLoader;

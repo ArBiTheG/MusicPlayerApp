@@ -18,7 +18,7 @@ namespace MusicPlayerApp.HostBuilders
             {
                 services.AddSingleton<IMusicDataLoader>(s => new MusicDataLoader(str => new MusicMetadata(str)));
                 services.AddSingleton<IMusicImageLoader>(s => new MusicImageLoader(str => new MusicMetadataImage(str)));
-                services.AddSingleton<IMusicPlayer,MediaMusicPlayer>();
+                services.AddSingleton<IMusicPlayer,VlcMusicPlayer>();
                 services.AddSingleton<MusicService>();
             });
             return hostBuilder;
