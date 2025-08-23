@@ -1,4 +1,5 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia.Controls.Shapes;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MusicPlayerApp.Models;
 using MusicPlayerApp.Services;
@@ -14,7 +15,7 @@ namespace MusicPlayerApp.ViewModels
     public partial class MusicViewModel: ViewModelBase
     {
         private Music _music;
-        private IMusicImageLoader _imageLoader;
+        private IMusicImageLoader? _imageLoader;
 
         [ObservableProperty]
         private string _title;
@@ -25,14 +26,23 @@ namespace MusicPlayerApp.ViewModels
         [ObservableProperty]
         private Bitmap? _cover;
 
-        public MusicViewModel(Music music, IMusicImageLoader imageLoader)
+        public MusicViewModel(Music music)
         {
             _music = music;
-            _imageLoader = imageLoader;
 
             Title = _music.Title;
             Artists = string.Join(",", _music.Artists);
-            Cover = LoadImage(_imageLoader, _music.Path);
+        }
+
+        public MusicViewModel(Music music, IMusicImageLoader imageLoader): this(music)
+        {
+            _imageLoader = imageLoader;
+        }
+
+        public void LoadImage()
+        {
+            if (_imageLoader!=null)
+                Cover = LoadImage(_imageLoader, _music.Path);
         }
 
         private static Bitmap? LoadImage(IMusicImageLoader imageLoader, string path)

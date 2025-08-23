@@ -12,22 +12,36 @@ namespace MusicPlayerApp.ViewModels
     public partial class HandleViewModel: ViewModelBase
     {
         [ObservableProperty]
-        private Music? _music;
+        private MusicViewModel? _currentMusic;
 
         private MusicService? _musicService;
         private IMusicPlayer? _musicPlayer;
+        private IMusicImageLoader? _musicImageLoader;
 
         public HandleViewModel()
         {
 
         }
 
-        public HandleViewModel(MusicService musicService, IMusicPlayer musicPlayer)
+        public HandleViewModel(MusicService musicService, IMusicPlayer musicPlayer, IMusicImageLoader musicImageLoader)
         {
             _musicService = musicService;
             _musicPlayer = musicPlayer;
+            _musicImageLoader = musicImageLoader;
+        }
 
-            Music = musicService.Open(@"Skillet_-_Hero_47950055.mp3");
+        private void AddMusic(string path)
+        {
+            if (_musicService == null)
+                return;
+
+            var music = _musicService.Open(path);
+
+            if (_musicImageLoader == null)
+                CurrentMusic = new MusicViewModel(music);
+            else
+                CurrentMusic = new MusicViewModel(music, _musicImageLoader);
+            CurrentMusic.LoadImage();
         }
 
         public string Greeting { get; } = "Welcome to Avalonia!";
