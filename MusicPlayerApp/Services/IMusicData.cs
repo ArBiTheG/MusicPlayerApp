@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public interface IMusicMetadata
+    public interface IMusicData
     {
         string Title { get; }
         string[] Artists { get; }
         string Album { get; }
         string[] Genres { get; }
         uint Year { get; }
-        byte[] ImageBytes { get; }
     }
 }

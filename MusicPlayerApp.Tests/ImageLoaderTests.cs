@@ -20,7 +20,7 @@ namespace MusicPlayerApp.Tests
         {
             int expected_lenght = 0; 
 
-            IMusicImageLoader loader = new MusicImageLoader(str => new MusicMetadata(str));
+            IMusicImageLoader loader = new MusicImageLoader(str => new MusicMetadataImage(str));
             byte[] bytes = loader.LoadBytes(PATH_SKILLET_HERO);
             int actual_lenght = bytes.Length;
             output.WriteLine($"Bytes: {actual_lenght}");

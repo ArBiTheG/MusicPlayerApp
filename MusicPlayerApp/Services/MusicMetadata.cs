@@ -10,7 +10,7 @@ using File = TagLib.File;
 
 namespace MusicPlayerApp.Services
 {
-    public class MusicMetadata : IMusicMetadata
+    public class MusicMetadata : IMusicData
     {
         File _file;
         public MusicMetadata(string path)
@@ -36,17 +36,6 @@ namespace MusicPlayerApp.Services
         public uint Year
         {
             get => _file.Tag.Year;
-        }
-        public byte[] ImageBytes
-        {
-            get {
-                IPicture? picture = _file.Tag.Pictures?.FirstOrDefault();
-                if (picture != null)
-                {
-                    return picture.Data.Data;
-                }
-                return [];
-            }
         }
 
     }

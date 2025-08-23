@@ -10,14 +10,14 @@ namespace MusicPlayerApp.Services
 {
     public class MusicDataLoader: IMusicDataLoader
     {
-        protected readonly Func<string, IMusicMetadata> CreateMetadata;
-        public MusicDataLoader(Func<string, IMusicMetadata> createMetadata)
+        protected readonly Func<string, IMusicData> CreateMetadata;
+        public MusicDataLoader(Func<string, IMusicData> createMetadata)
         {
             CreateMetadata = createMetadata;
         }
         public Music Load(string path)
         {
-            IMusicMetadata metadata = CreateMetadata(path);
+            IMusicData metadata = CreateMetadata(path);
             return new Music()
             {
                 Path = path,

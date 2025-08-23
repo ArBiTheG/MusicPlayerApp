@@ -9,15 +9,15 @@ namespace MusicPlayerApp.Services
 {
     public class MusicImageLoader: IMusicImageLoader
     {
-        protected readonly Func<string, IMusicMetadata> CreateMetadata;
-        public MusicImageLoader(Func<string, IMusicMetadata> createMetadata)
+        protected readonly Func<string, IMusicImage> CreateImage;
+        public MusicImageLoader(Func<string, IMusicImage> createMetadata)
         {
-            CreateMetadata = createMetadata;
+            CreateImage = createMetadata;
         }
 
         public byte[] LoadBytes(string path)
         {
-            IMusicMetadata metadata = CreateMetadata(path);
+            IMusicImage metadata = CreateImage(path);
             return metadata.ImageBytes;
         }
     }
