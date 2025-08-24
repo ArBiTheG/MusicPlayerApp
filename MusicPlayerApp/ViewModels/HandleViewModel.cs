@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicPlayerApp.Models;
 using MusicPlayerApp.Services;
+using MusicPlayerApp.Services.MusicPlayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusicPlayerApp.Services;
+using MusicPlayerApp.Services.MusicPlayer;
 using MusicPlayerApp.ViewModels;
 using System;
 using System.Collections.Generic;
