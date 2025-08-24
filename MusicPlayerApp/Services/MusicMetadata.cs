@@ -12,57 +12,31 @@ using File = TagLib.File;
 
 namespace MusicPlayerApp.Services
 {
-    public class MusicMetadata : IMusicMetadata, IDisposable
+    public class MusicMetadata : IMusicMetadata
     {
-        private readonly File _file;
+        public string Title { get; }
+        public string Album { get; }
+        public int Year { get; }
+        public IEnumerable<string> Artists { get; }
+        public IEnumerable<string> Genres { get; }
+
         public MusicMetadata(string path)
         {
             try
             {
-                _file = File.Create(path);
+                using var file = File.Create(path);
+                var tag = file.Tag;
+
+                Title = tag.Title;
+                Album = tag.Album;
+                Year = (int)tag.Year;
+                Artists = tag.Performers.ToArray();
+                Genres = tag.Genres.ToArray();
             }
             catch
             {
                 throw new MetadataException($"Не удалось открыть файл '{path}' для чтения метаданных");
             }
-        }
-        public string Title 
-        { 
-            get => _file.Tag.Title; 
-        }
-        public string[] Artists
-        {
-            get => _file.Tag.Performers;
-        }
-        public string Album
-        {
-            get => _file.Tag.Album;
-        }
-        public string[] Genres 
-        {
-            get => _file.Tag.Genres;
-        }
-        public uint Year
-        {
-            get => _file.Tag.Year;
-        }
-
-        private bool disposed = false;
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed) return;
-            if (disposing)
-            {
-                _file.Dispose();
-            }
-            disposed = true;
         }
     }
 }
