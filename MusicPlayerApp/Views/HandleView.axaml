@@ -11,13 +11,33 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:HandleViewModel/>
 	</Design.DataContext>
+	<Interaction.Behaviors>
+		<EventTriggerBehavior EventName="Loaded">
+			<InvokeCommandAction Command="{Binding LoadCommand}" />
+		</EventTriggerBehavior>
+	</Interaction.Behaviors>
+
 	<Grid RowDefinitions="*,auto">
 		<Image Source="{Binding CurrentMusic.Cover}"/>
 		<TextBlock Text="{Binding CurrentMusic.Title}"/>
 		<Grid Grid.Row="1">
 			<StackPanel>
-				<Button Content="Запустить"/>
-				<Button Content="Остановить"/>
+				<Slider Value="{Binding ProgressMusic}"/>
+				<Grid ColumnDefinitions="5*,*">
+					<StackPanel Grid.Column="0" 
+								Orientation="Horizontal">
+						<Button Content="strt"
+								Command="{Binding PlayPauseMusicCommand}"/>
+						<Button Content="stop"
+								Command="{Binding StopMusicCommand}"/>
+						<Button Content="prev"
+								Command="{Binding PreviousMusicCommand}"/>
+						<Button Content="next"
+								Command="{Binding NextMusicCommand}"/>
+					</StackPanel>
+					<Slider Grid.Column="1" 
+							Value="{Binding VolumeMusic}"/>
+				</Grid>
 			</StackPanel>
 		</Grid>
 	</Grid>
