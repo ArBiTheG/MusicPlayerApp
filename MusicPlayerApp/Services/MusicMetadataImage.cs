@@ -24,17 +24,16 @@ namespace MusicPlayerApp.Services
                 throw new MetadataException($"Не удалось открыть файл '{path}' для чтения метаданных");
             }
         }
-        public byte[] ImageBytes
+
+        public byte[] GetBytes()
         {
-            get
-            {
-                IPicture? picture = _file.Tag.Pictures?.FirstOrDefault();
-                if (picture != null)
-                {
-                    return picture.Data.Data;
-                }
-                return [];
-            }
+            IPicture? picture = _file.Tag.Pictures.FirstOrDefault();
+            return picture?.Data.Data ?? Array.Empty<byte>();
+        }
+
+        public async Task<byte[]> GetBytesAsync()
+        {
+            return await Task.FromResult(GetBytes());
         }
     }
 }

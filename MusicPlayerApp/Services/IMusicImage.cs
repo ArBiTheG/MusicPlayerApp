@@ -8,6 +8,7 @@ namespace MusicPlayerApp.Services
 {
     public interface IMusicImage
     {
-        byte[] ImageBytes { get; }
+        byte[] GetBytes();
+        Task<byte[]> GetBytesAsync();
     }
 }

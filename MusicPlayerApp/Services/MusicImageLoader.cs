@@ -15,8 +15,7 @@ namespace MusicPlayerApp.Services
         {
             CreateImage = createMetadata;
         }
-
-        public byte[] LoadBytes(string path)
+        public Stream Load(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("Путь до файла не может быть пустым");
@@ -25,8 +24,21 @@ namespace MusicPlayerApp.Services
             if (!File.Exists(fullPath))
                 throw new ArgumentException("Указанный файл не найден");
 
-            IMusicImage metadata = CreateImage(fullPath);
-            return metadata.ImageBytes;
+            IMusicImage metadata = CreateImage(path);
+            return new MemoryStream(metadata.GetBytes());
+        }
+
+        public async Task<Stream> LoadAsync(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("Путь до файла не может быть пустым");
+
+            string fullPath = Path.GetFullPath(path);
+            if (!File.Exists(fullPath))
+                throw new ArgumentException("Указанный файл не найден");
+
+            IMusicImage metadata = CreateImage(path);
+            return new MemoryStream(await metadata.GetBytesAsync());
         }
     }
 }

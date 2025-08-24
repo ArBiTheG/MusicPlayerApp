@@ -3,6 +3,7 @@ using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MusicPlayerApp.Models;
 using MusicPlayerApp.Services;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,34 +27,24 @@ namespace MusicPlayerApp.ViewModels
         [ObservableProperty]
         private Bitmap? _cover;
 
-        public MusicViewModel(Music music)
+        public MusicViewModel(Music music, IMusicImageLoader? imageLoader)
         {
             _music = music;
+            _imageLoader = imageLoader;
 
             Title = _music.Title;
             Artists = string.Join(",", _music.Artists);
         }
 
-        public MusicViewModel(Music music, IMusicImageLoader imageLoader): this(music)
+        public async Task LoadCover()
         {
-            _imageLoader = imageLoader;
-        }
+            if (_imageLoader == null)
+                return;
 
-        public void LoadImage()
-        {
-            if (_imageLoader!=null)
-                Cover = LoadImage(_imageLoader, _music.Path);
-        }
-
-        private static Bitmap? LoadImage(IMusicImageLoader imageLoader, string path)
-        {
-            byte[] bytes = imageLoader.LoadBytes(path);
-            if (bytes.Length>0)
+            await using (var imageStream = await _imageLoader.LoadAsync(_music.Path))
             {
-                using MemoryStream memoryStream = new MemoryStream(bytes);
-                return new Bitmap(memoryStream);
+                Cover = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 128));
             }
-            return null;
         }
     }
 }

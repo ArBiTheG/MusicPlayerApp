@@ -37,11 +37,8 @@ namespace MusicPlayerApp.ViewModels
 
             var music = _musicService.Open(path);
 
-            if (_musicImageLoader == null)
-                CurrentMusic = new MusicViewModel(music);
-            else
-                CurrentMusic = new MusicViewModel(music, _musicImageLoader);
-            CurrentMusic.LoadImage();
+            CurrentMusic = new MusicViewModel(music, _musicImageLoader);
+            CurrentMusic.LoadCover();
         }
 
         public string Greeting { get; } = "Welcome to Avalonia!";
