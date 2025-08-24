@@ -10,7 +10,7 @@ namespace MusicPlayerApp.Models
     {
         public string Path { get; set; }
         public string Title { get; set; }
-        public string[] Artists { get; set; }
+        public IEnumerable<string> Artists { get; set; }
         public string Album { get; set; }
         public string CoverUrl { get; set; }
 

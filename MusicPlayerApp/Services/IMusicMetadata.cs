@@ -10,9 +10,9 @@ namespace MusicPlayerApp.Services
     public interface IMusicMetadata
     {
         string Title { get; }
-        string[] Artists { get; }
+        IEnumerable<string> Artists { get; }
         string Album { get; }
-        string[] Genres { get; }
-        uint Year { get; }
+        IEnumerable<string> Genres { get; }
+        int Year { get; }
     }
 }
