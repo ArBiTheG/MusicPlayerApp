@@ -1,6 +1,8 @@
 ﻿using LibVLCSharp.Shared;
+using MusicPlayerApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,12 +42,19 @@ namespace MusicPlayerApp.Services
             _mediaPlayer.Pause();
         }
 
-        public void Play(string path)
+        public void Load(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("Путь до файла не может быть пустым");
+
+            string fullPath = Path.GetFullPath(path);
+            if (!File.Exists(fullPath))
+                throw new ArgumentException("Указанный файл не найден");
+
             _currentMedia?.Dispose();
-            _currentMedia = new Media(_libVLC, new Uri(path));
+            _currentMedia = new Media(_libVLC, new Uri(fullPath));
             _currentMedia.AddOption(":no-video");
-            _mediaPlayer.Play(_currentMedia);
+            _mediaPlayer.Media = _currentMedia;
         }
 
         public void Play()

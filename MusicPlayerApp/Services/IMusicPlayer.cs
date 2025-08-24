@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicPlayerApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace MusicPlayerApp.Services
 {
     public interface IMusicPlayer
     {
-        void Play(string path);
+        void Load(string path);
         void Play();
         void Pause();
         void Stop();
