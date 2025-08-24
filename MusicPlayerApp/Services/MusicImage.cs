@@ -13,6 +13,8 @@ namespace MusicPlayerApp.Services
     public class MusicImage : IMusicImage
     {
         private readonly File _file;
+        private bool _disposed;
+
         public MusicImage(string path)
         {
             try
@@ -25,15 +27,26 @@ namespace MusicPlayerApp.Services
             }
         }
 
-        public byte[] GetBytes()
+        public Stream GetImageStream()
         {
-            IPicture? picture = _file.Tag.Pictures.FirstOrDefault();
-            return picture?.Data.Data ?? Array.Empty<byte>();
+            var picture = _file.Tag.Pictures.FirstOrDefault();
+            if (picture == null)
+                return Stream.Null;
+
+            var bytes = picture.Data?.Data;
+            if (bytes == null)
+                return Stream.Null;
+            if (bytes.Length == 0)
+                return Stream.Null;
+
+            return new MemoryStream(bytes, writable: false);
         }
 
-        public async Task<byte[]> GetBytesAsync()
+        public void Dispose()
         {
-            return await Task.FromResult(GetBytes());
+            if (_disposed) return;
+            _file.Dispose();
+            _disposed = true;
         }
     }
 }
