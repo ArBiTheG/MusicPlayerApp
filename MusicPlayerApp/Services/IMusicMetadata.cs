@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public interface IMusicData
+    public interface IMusicMetadata
     {
         string Title { get; }
         string[] Artists { get; }

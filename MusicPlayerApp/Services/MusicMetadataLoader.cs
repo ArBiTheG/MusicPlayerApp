@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Services
 {
-    public class MusicDataLoader: IMusicDataLoader
+    public class MusicMetadataLoader: IMusicMetadataLoader
     {
-        protected readonly Func<string, IMusicData> CreateMetadata;
-        public MusicDataLoader(Func<string, IMusicData> createMetadata)
+        protected readonly Func<string, IMusicMetadata> CreateMetadata;
+        public MusicMetadataLoader(Func<string, IMusicMetadata> createMetadata)
         {
             CreateMetadata = createMetadata;
         }
@@ -25,7 +25,7 @@ namespace MusicPlayerApp.Services
             if (!File.Exists(fullPath))
                 throw new ArgumentException("Указанный файл не найден");
 
-            IMusicData metadata = CreateMetadata(path);
+            IMusicMetadata metadata = CreateMetadata(path);
             return new Music()
             {
                 Path = path,

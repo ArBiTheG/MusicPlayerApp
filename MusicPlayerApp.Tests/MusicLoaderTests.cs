@@ -20,7 +20,7 @@ namespace MusicPlayerApp.Tests
         {
             string expected = "Hero";
 
-            IMusicDataLoader loader = new MusicDataLoader(str => new MusicMetadata(str));
+            IMusicMetadataLoader loader = new MusicMetadataLoader(str => new MusicMetadata(str));
             Music music = loader.Load(PATH_SKILLET_HERO);
 
             string actual = music.Title;
@@ -34,7 +34,7 @@ namespace MusicPlayerApp.Tests
         {
             string expected = "Skillet";
 
-            IMusicDataLoader loader = new MusicDataLoader(str => new MusicMetadata(str));
+            IMusicMetadataLoader loader = new MusicMetadataLoader(str => new MusicMetadata(str));
             Music music = loader.Load(PATH_SKILLET_HERO);
 
             string[] actual = music.Artists;

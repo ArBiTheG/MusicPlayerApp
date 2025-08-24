@@ -19,7 +19,7 @@ namespace MusicPlayerApp.Tests
         {
             string expected = "Hero";
 
-            IMusicData metadata = new MusicMetadata(PATH_SKILLET_HERO);
+            IMusicMetadata metadata = new MusicMetadata(PATH_SKILLET_HERO);
             string actual = metadata.Title;
             output.WriteLine("Title: " + actual);
 
@@ -30,7 +30,7 @@ namespace MusicPlayerApp.Tests
         {
             string expected = "Skillet";
 
-            IMusicData metadata = new MusicMetadata(PATH_SKILLET_HERO);
+            IMusicMetadata metadata = new MusicMetadata(PATH_SKILLET_HERO);
             string[] actual = metadata.Artists;
             output.WriteLine("Artists: " + string.Join(", ",actual));
 

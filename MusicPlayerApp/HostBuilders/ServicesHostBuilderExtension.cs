@@ -18,8 +18,8 @@ namespace MusicPlayerApp.HostBuilders
         {
             hostBuilder.ConfigureServices((context, services) =>
             {
-                services.AddSingleton<IMusicDataLoader>(s => new MusicDataLoader(str => new MusicMetadata(str)));
-                services.AddSingleton<IMusicImageLoader>(s => new MusicImageLoader(str => new MusicMetadataImage(str)));
+                services.AddSingleton<IMusicMetadataLoader>(s => new MusicMetadataLoader(str => new MusicMetadata(str)));
+                services.AddSingleton<IMusicImageLoader>(s => new MusicImageLoader(str => new MusicImage(str)));
 
                 services.AddSingleton(new LibVLC());
                 services.AddSingleton<MediaPlayer>();

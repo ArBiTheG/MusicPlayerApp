@@ -10,10 +10,10 @@ using File = TagLib.File;
 
 namespace MusicPlayerApp.Services
 {
-    public class MusicMetadataImage : IMusicImage
+    public class MusicImage : IMusicImage
     {
         private readonly File _file;
-        public MusicMetadataImage(string path)
+        public MusicImage(string path)
         {
             try
             {

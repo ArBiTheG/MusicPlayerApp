@@ -100,7 +100,7 @@ namespace MusicPlayerApp.ViewModels
         {
             if (_musicPlayer == null)
                 return;
-            _musicPlayer.Position = (float)value/100;
+            //_musicPlayer.Position = (float)value/100;
         }
         partial void OnVolumeMusicChanged(int value)
         {

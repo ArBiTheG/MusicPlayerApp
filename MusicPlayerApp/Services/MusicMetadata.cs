@@ -12,7 +12,7 @@ using File = TagLib.File;
 
 namespace MusicPlayerApp.Services
 {
-    public class MusicMetadata : IMusicData, IDisposable
+    public class MusicMetadata : IMusicMetadata, IDisposable
     {
         private readonly File _file;
         public MusicMetadata(string path)
