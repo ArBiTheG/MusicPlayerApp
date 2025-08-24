@@ -18,22 +18,20 @@ namespace MusicPlayerApp.ViewModels
         private Music _music;
         private IMusicImageLoader? _imageLoader;
 
-        [ObservableProperty]
-        private string _title;
-
-        [ObservableProperty]
-        private string _artists;
-
-        [ObservableProperty]
-        private Bitmap? _cover;
+        private Bitmap? _сover;
 
         public MusicViewModel(Music music, IMusicImageLoader? imageLoader)
         {
             _music = music;
             _imageLoader = imageLoader;
+        }
 
-            Title = _music.Title;
-            Artists = string.Join(",", _music.Artists);
+        public string Title => _music.Title;
+        public string Artists => string.Join(",", _music.Artists);
+        public Bitmap? Cover
+        {
+            get => _сover;
+            private set => SetProperty(ref _сover, value);
         }
 
         public async Task LoadCover()
