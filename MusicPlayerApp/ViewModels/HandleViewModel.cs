@@ -5,6 +5,7 @@ using MusicPlayerApp.Services;
 using MusicPlayerApp.Services.MusicPlayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,13 @@ namespace MusicPlayerApp.ViewModels
         private IMusicImageLoader? _musicImageLoader;
 
         [ObservableProperty]
+        private bool _isPaneOpen  =true;
+
+        [ObservableProperty]
         private MusicViewModel? _currentMusic;
+
+        [ObservableProperty]
+        private ObservableCollection<MusicViewModel> _musicList;
 
         [ObservableProperty]
         private int _progressMusic;
@@ -28,13 +35,22 @@ namespace MusicPlayerApp.ViewModels
 
         public HandleViewModel()
         {
+            _musicList = new ObservableCollection<MusicViewModel>();
         }
 
         public HandleViewModel(MusicService musicService, IMusicPlayer musicPlayer, IMusicImageLoader musicImageLoader)
         {
+            _musicList = new ObservableCollection<MusicViewModel>();
+
             _musicService = musicService;
             _musicPlayer = musicPlayer;
             _musicImageLoader = musicImageLoader;
+        }
+
+        [RelayCommand]
+        private void PaneOpenClose()
+        {
+            IsPaneOpen = !IsPaneOpen;
         }
 
         [RelayCommand]

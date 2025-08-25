@@ -17,28 +17,91 @@
 		</EventTriggerBehavior>
 	</Interaction.Behaviors>
 
-	<Grid RowDefinitions="*,auto">
-		<Image Source="{Binding CurrentMusic.Cover}"/>
-		<TextBlock Text="{Binding CurrentMusic.Title}"/>
-		<Grid Grid.Row="1">
-			<StackPanel>
-				<Slider Value="{Binding ProgressMusic}"/>
-				<Grid ColumnDefinitions="5*,*">
-					<StackPanel Grid.Column="0" 
-								Orientation="Horizontal">
-						<Button Content="strt"
-								Command="{Binding PlayPauseMusicCommand}"/>
-						<Button Content="stop"
-								Command="{Binding StopMusicCommand}"/>
-						<Button Content="prev"
-								Command="{Binding PreviousMusicCommand}"/>
-						<Button Content="next"
-								Command="{Binding NextMusicCommand}"/>
-					</StackPanel>
-					<Slider Grid.Column="1" 
-							Value="{Binding VolumeMusic}"/>
-				</Grid>
-			</StackPanel>
-		</Grid>
-	</Grid>
+	<SplitView IsPaneOpen="{Binding IsPaneOpen}"
+			    OpenPaneLength="256"
+				CompactPaneLength="0"
+				DisplayMode="CompactInline">
+		<SplitView.Pane>
+			<Grid RowDefinitions="auto,*,auto">
+				<StackPanel Margin="4" Grid.Row="0">
+					<TextBlock Classes="h1" Margin="2" Text="Сейчас играет"/>
+					<Grid Margin="2" ColumnDefinitions="auto,*">
+						<Image Margin="2" Grid.Column="0"
+							   Width="48"
+							   Height="48"
+							   Source="{Binding CurrentMusic.Cover}"/>
+						<StackPanel Grid.Column="1">
+							<TextBlock Margin="2" Text="{Binding CurrentMusic.Artists}"/>
+							<TextBlock Margin="2" Text="{Binding CurrentMusic.Title}"/>
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+				<StackPanel Margin="4" Grid.Row="1">
+					<TextBlock Classes="h2" Margin="2" Text="Плейлист"/>
+					<ItemsControl Margin="2" ItemsSource="{Binding MusicList}">
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Grid ColumnDefinitions="auto,*,auto,auto">
+									<Image Margin="2" Grid.Column="0"
+										   Width="48"
+										   Height="48"
+										   Source="{Binding Cover}"/>
+									<StackPanel Grid.Column="1">
+										<TextBlock Margin="2" Text="{Binding Artists}"/>
+										<TextBlock Margin="2" Text="{Binding Title}"/>
+									</StackPanel>
+									<Button Margin="2" Grid.Column="2" Content="Играть"/>
+									<Button Margin="2" Grid.Column="3" Content="Удалить"/>
+								</Grid>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</StackPanel>
+				<StackPanel Grid.Row="2">
+					<Button Content="Добавить"
+							Command="{Binding AddMusicCommand}"/>
+				</StackPanel>
+			</Grid>
+		</SplitView.Pane>
+		<SplitView.Content>
+			<Grid RowDefinitions="auto,*,auto">
+				<StackPanel>
+					<Button Content="Pane Open/Close"
+							Command="{Binding PaneOpenCloseCommand}"/>
+				</StackPanel>
+				<StackPanel Grid.Row="1" VerticalAlignment="Center"
+							HorizontalAlignment="Center">
+					<Image Width="256"
+						   Height="256"
+						   Source="{Binding CurrentMusic.Cover}"/>
+					<TextBlock HorizontalAlignment="Center"
+							   Text="{Binding CurrentMusic.Artists}"/>
+					<TextBlock HorizontalAlignment="Center"
+							   Text="{Binding CurrentMusic.Title}"/>
+				</StackPanel>
+				<StackPanel Grid.Row="2">
+					<Grid ColumnDefinitions="auto,*,auto">
+						<TextBlock Grid.Column="0" Margin="4" VerticalAlignment="Center" Text="00:00"/>
+						<Slider Grid.Column="1" Margin="4" VerticalAlignment="Center" Value="{Binding ProgressMusic}"/>
+						<TextBlock Grid.Column="2" Margin="4" VerticalAlignment="Center" Text="00:00"/>
+					</Grid>
+					<Grid ColumnDefinitions="5*,*">
+						<StackPanel Grid.Column="0" Margin="4"
+									Orientation="Horizontal">
+							<Button Content="Играть"
+									Command="{Binding PlayPauseMusicCommand}"/>
+							<Button Content="Остановить"
+									Command="{Binding StopMusicCommand}"/>
+							<Button Content="Предыдущий"
+									Command="{Binding PreviousMusicCommand}"/>
+							<Button Content="Следующий"
+									Command="{Binding NextMusicCommand}"/>
+						</StackPanel>
+						<Slider Grid.Column="1" Margin="4"
+								Value="{Binding VolumeMusic}"/>
+					</Grid>
+				</StackPanel>
+			</Grid>
+		</SplitView.Content>
+	</SplitView>
 </UserControl>
