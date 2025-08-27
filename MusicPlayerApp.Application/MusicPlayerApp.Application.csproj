@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\MusicPlayerApp.Domain\MusicPlayerApp.Domain.csproj" />
+	</ItemGroup>
+	
 </Project>
