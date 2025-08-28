@@ -361,4 +361,29 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Music Files (lossy)
 *.mp3
+*.aac
+*.m4a
+*.ogg
+*.wma
+*.opus
+*.mp2
+*.mp1
+*.ra
+*.ram
+*.amr
+*.au
+
+# Music Files (lossless)
+*.flac
+*.wav
+*.aiff
+*.aif
+*.alac
+*.ape
+*.wv
+*.tta
+*.dsf
+*.dff
