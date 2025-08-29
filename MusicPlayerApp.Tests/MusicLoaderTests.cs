@@ -1,4 +1,4 @@
-﻿using MusicPlayerApp.Domain.Interfaces;
+﻿using MusicPlayerApp.Domain.Interfaces.Loaders;
 using MusicPlayerApp.Infrastructure.Loaders;
 using Xunit.Abstractions;
 

@@ -1,5 +1,5 @@
 ﻿using MusicPlayerApp.Domain.Exceptions;
-using MusicPlayerApp.Domain.Interfaces;
+using MusicPlayerApp.Domain.Interfaces.Loaders;
 using MusicPlayerApp.Domain.Models;
 using System;
 using System.Collections.Generic;

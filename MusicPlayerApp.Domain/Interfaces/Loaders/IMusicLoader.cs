@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicPlayerApp.Domain.Interfaces
+namespace MusicPlayerApp.Domain.Interfaces.Loaders
 {
     public interface IMusicLoader
     {
