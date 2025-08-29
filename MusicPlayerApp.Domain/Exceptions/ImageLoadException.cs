@@ -20,9 +20,5 @@ namespace MusicPlayerApp.Domain.Exceptions
         public ImageLoadException(string? message, Exception? innerException) : base(message, innerException)
         {
         }
-
-        protected ImageLoadException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 }
