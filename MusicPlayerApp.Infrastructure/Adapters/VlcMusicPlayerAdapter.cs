@@ -16,13 +16,10 @@ namespace MusicPlayerApp.Infrastructure.Adapters
         private readonly MediaPlayer _mediaPlayer;
         private readonly LibVLC _libVLC;
 
-        private bool _disposed;
-
-        public VlcMusicPlayerAdapter()
+        public VlcMusicPlayerAdapter(MediaPlayer mediaPlayer, LibVLC libVLC)
         {
-            Core.Initialize();
-            _libVLC = new LibVLC();
-            _mediaPlayer = new MediaPlayer(_libVLC);
+            _mediaPlayer = mediaPlayer;
+            _libVLC = libVLC;
         }
 
         public bool IsPlaying => _mediaPlayer.IsPlaying;
@@ -46,17 +43,5 @@ namespace MusicPlayerApp.Infrastructure.Adapters
         public void Pause() => _mediaPlayer.Pause();
 
         public void Stop() => _mediaPlayer.Stop();
-
-
-        public void Dispose()
-        {
-            if (_disposed) return;
-            _disposed = true;
-
-            _mediaPlayer.Dispose();
-            _libVLC.Dispose();
-
-            GC.SuppressFinalize(this);
-        }
     }
 }
