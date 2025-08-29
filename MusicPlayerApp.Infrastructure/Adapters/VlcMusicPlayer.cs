@@ -18,10 +18,11 @@ namespace MusicPlayerApp.Infrastructure.Adapters
 
         private bool _disposed;
 
-        public VlcMusicPlayer(MediaPlayer mediaPlayer, LibVLC libVLC)
+        public VlcMusicPlayer()
         {
-            _mediaPlayer = mediaPlayer;
-            _libVLC = libVLC;
+            Core.Initialize();
+            _libVLC = new LibVLC();
+            _mediaPlayer = new MediaPlayer(_libVLC);
         }
 
         public void Open(string path)
