@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Domain.Interfaces.Adapters
 {
-    public interface IMusicPlayer: IDisposable
+    public interface IMusicPlayerAdapter: IDisposable
     {
+        bool IsPlaying { get; }
+        int Volume { get; set; }
+
         void Open(string path);
         bool Play();
         void Pause();

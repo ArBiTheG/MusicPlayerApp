@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerApp.Infrastructure.Adapters
 {
-    public class VlcMusicPlayer : IMusicPlayer
+    public class VlcMusicPlayerAdapter : IMusicPlayerAdapter
     {
         private const string NO_VIDEO = ":no-video";
 
@@ -18,11 +18,19 @@ namespace MusicPlayerApp.Infrastructure.Adapters
 
         private bool _disposed;
 
-        public VlcMusicPlayer()
+        public VlcMusicPlayerAdapter()
         {
             Core.Initialize();
             _libVLC = new LibVLC();
             _mediaPlayer = new MediaPlayer(_libVLC);
+        }
+
+        public bool IsPlaying => _mediaPlayer.IsPlaying;
+
+        public int Volume
+        {
+            get => _mediaPlayer.Volume;
+            set => _mediaPlayer.Volume = Math.Clamp(value, 0, 100);
         }
 
         public void Open(string path)
@@ -38,6 +46,7 @@ namespace MusicPlayerApp.Infrastructure.Adapters
         public void Pause() => _mediaPlayer.Pause();
 
         public void Stop() => _mediaPlayer.Stop();
+
 
         public void Dispose()
         {
