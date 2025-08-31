@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestPlatform.Utilities;
-using MusicPlayerApp.Domain.Interfaces.Loaders;
+using MusicPlayerApp.Core.Interfaces.Loaders;
 using MusicPlayerApp.Infrastructure.Loaders;
 using TagLib.Id3v2;
 using Xunit.Abstractions;

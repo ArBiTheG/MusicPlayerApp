@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\MusicPlayerApp.Application\MusicPlayerApp.Application.csproj" />
+		<ProjectReference Include="..\MusicPlayerApp.Core\MusicPlayerApp.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

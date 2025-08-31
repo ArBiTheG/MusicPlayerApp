@@ -1,6 +1,6 @@
 ﻿using LibVLCSharp.Shared;
-using MusicPlayerApp.Domain.Interfaces;
-using MusicPlayerApp.Domain.Interfaces.Adapters;
+using MusicPlayerApp.Core.Interfaces;
+using MusicPlayerApp.Core.Interfaces.Adapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
