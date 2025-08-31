@@ -14,7 +14,7 @@ namespace MusicPlayerApp.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IMusicLoader, TagLibMusicLoader>();
             services.AddSingleton<IImageLoader, TagLibImageLoader>();

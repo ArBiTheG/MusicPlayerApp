@@ -24,4 +24,13 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
   </ItemGroup>
+
+  <ItemGroup>
+  	<ProjectReference Include="..\MusicPlayerApp.Infrastructure\MusicPlayerApp.Infrastructure.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+  	<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
+  </ItemGroup>
+	
 </Project>
