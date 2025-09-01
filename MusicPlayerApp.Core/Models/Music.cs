@@ -29,6 +29,12 @@ namespace MusicPlayerApp.Core.Models
             Album = string.Empty;
             Genres = new List<string>();
         }
-
+        public string GetFirstArtist()
+        {
+            if (Artists != null)
+                if (Artists.Count > 0)
+                    return Artists.ElementAt(0);
+            return string.Empty;
+        }
     }
 }
